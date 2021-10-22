@@ -5,7 +5,6 @@
     <string name="days_range_error">The value must be integer and in the range from 1 to 3650</string>
     <string name="daysCount">Days count</string>
     <string name="settings">settings</string>
-    <string name="change_language">change value</string>
     <string name="currency">Currency</string>
     <string name="usd">USD</string>
     <string name="pref_currency">pref_currency</string>

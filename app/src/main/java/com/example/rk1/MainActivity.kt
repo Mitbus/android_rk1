@@ -34,18 +34,7 @@ class MainActivity : AppCompatActivity() {
         val itemId = item.itemId
         if (itemId == R.id.settings) {
             startActivity(Intent(this, SettingsActivity::class.java))
-        } else if (itemId == R.id.changeLang) {
-            changeOSLanguage("en")
         }
         return super.onOptionsItemSelected(item)
     }
-
-
-    fun changeOSLanguage(language: String) {
-        // only for testing
-        resources.configuration.setLocale(Locale(language))
-        resources.updateConfiguration(resources.configuration, null)
-        recreate()
-    }
-
 }
