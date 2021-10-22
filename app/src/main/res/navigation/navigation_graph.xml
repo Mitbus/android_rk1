@@ -6,17 +6,17 @@
     app:startDestination="@id/fragment_main">
 
     <fragment
-        android:id="@+id/fragment_settings"
-        android:name="com.example.lab3.fragment_settings"
-        android:label="fragment_more_info"
-        tools:layout="@layout/fragment_more_info" />
-    <fragment
         android:id="@+id/fragment_main"
-        android:name="com.example.lab3.fragment_main"
+        android:name="com.example.rk1.fragment_main"
         android:label="fragment_main"
         tools:layout="@layout/fragment_main" >
         <action
-            android:id="@+id/action_fragment_main_to_fragment_settings"
-            app:destination="@id/fragment_settings" />
+            android:id="@+id/action_fragment_main_to_fragment_more_info"
+            app:destination="@id/fragment_more_info" />
     </fragment>
+    <fragment
+        android:id="@+id/fragment_more_info"
+        android:name="com.example.rk1.fragment_settings"
+        android:label="fragment_more_info"
+        tools:layout="@layout/fragment_more_info" />
 </navigation>
