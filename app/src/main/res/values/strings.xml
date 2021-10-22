@@ -2,4 +2,6 @@
     <string name="app_name">rk1</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="days_range_error">The number must be in the range from 1 to 3650</string>
+    <string name="daysCount">Days count</string>
 </resources>
