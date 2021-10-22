@@ -6,7 +6,10 @@
     <string name="daysCount">Days count</string>
     <string name="settings">settings</string>
     <string name="currency">Currency</string>
+    <string name="language">Language</string>
     <string name="usd">USD</string>
-    <string name="pref_currency">pref_currency</string>
+    <string name="ru">RU</string>
+    <string name="pref_currency">currency</string>
     <string name="pref_days_count">daysCount</string>
+    <string name="pref_language">language</string>
 </resources>

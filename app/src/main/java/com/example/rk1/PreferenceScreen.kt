@@ -19,7 +19,7 @@ class PreferenceScreen : PreferenceFragmentCompat(), SharedPreferences.OnSharedP
             }
         }
         sharedPreferences.registerOnSharedPreferenceChangeListener(this)
-        preferenceScreen.findPreference<Preference>("daysCount")?.onPreferenceChangeListener = this
+        preferenceScreen.findPreference<Preference>(resources.getString(R.string.pref_days_count))?.onPreferenceChangeListener = this
     }
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences, s: String) {

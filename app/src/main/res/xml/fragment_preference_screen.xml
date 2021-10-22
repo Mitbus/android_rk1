@@ -5,8 +5,7 @@
 
     <EditTextPreference
         app:key="daysCount"
-        app:title="@string/daysCount"
-        app:summary="test"/>
+        app:title="@string/daysCount"/>
 
     <ListPreference
         android:defaultValue="@string/usd"
@@ -14,5 +13,12 @@
         android:entryValues="@array/currency"
         android:key="@string/pref_currency"
         android:title="@string/currency"/>
+
+    <ListPreference
+        android:defaultValue="@string/ru"
+        android:entries="@array/language"
+        android:entryValues="@array/language"
+        android:key="@string/pref_language"
+        android:title="@string/language"/>
 
 </PreferenceScreen>
