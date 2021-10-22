@@ -4,4 +4,6 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="days_range_error">The number must be in the range from 1 to 3650</string>
     <string name="daysCount">Days count</string>
+    <string name="settings">settings</string>
+    <string name="change_language">change value</string>
 </resources>
