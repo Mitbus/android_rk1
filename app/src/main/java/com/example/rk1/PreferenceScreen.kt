@@ -4,7 +4,6 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import android.widget.Toast
 import androidx.preference.CheckBoxPreference
-import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 
@@ -16,34 +15,26 @@ class PreferenceScreen : PreferenceFragmentCompat(), SharedPreferences.OnSharedP
             val p = preferenceScreen.getPreference(i)
             if (p !is CheckBoxPreference) {
                 val value = sharedPreferences.getString(p.key, "")
-                setPreferenceSummary(p, value)
+                p.summary = value
             }
         }
         sharedPreferences.registerOnSharedPreferenceChangeListener(this)
+        preferenceScreen.findPreference<Preference>("daysCount")?.onPreferenceChangeListener = this
     }
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences, s: String) {
         val preference = findPreference<Preference>(s)
         if (preference != null && preference !is CheckBoxPreference) {
             val value = sharedPreferences.getString(preference.key, "")
-            setPreferenceSummary(preference, value)
-        }
-    }
-
-    private fun setPreferenceSummary(preference: Preference, value: String?) {
-        if (preference is ListPreference) {
-            val prefIndex = preference.findIndexOfValue(value)
-            if (prefIndex >= 0) {
-                preference.setSummary(preference.entries[prefIndex])
-            }
+            preference.summary = value
         }
     }
 
     override fun onPreferenceChange(preference: Preference, value: Any): Boolean {
         when (preference.key) {
             "daysCount" -> {
-                val countOrNull = (value as? String)?.toIntOrNull() ?: return false
-                if (countOrNull !in 1 .. 365 * 10) {
+                val countOrNull = (value as? String)?.toIntOrNull()
+                if (countOrNull == null || countOrNull !in 1 .. 365 * 10) {
                     Toast.makeText(context, resources.getString(R.string.days_range_error), Toast.LENGTH_SHORT).show()
                     return false
                 }
