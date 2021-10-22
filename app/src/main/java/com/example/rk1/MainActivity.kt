@@ -1,4 +1,4 @@
-package com.example.lab3
+package com.example.rk1
 
 import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
@@ -8,6 +8,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.lab3.R
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -65,8 +66,7 @@ class MainActivity : AppCompatActivity() {
             adapter = viewAdapter
         }
 
-        NetworkService
-            .getJSONApi()
+        NetworkService.getJSONApi()
             ?.getData("bash", 50)
             ?.enqueue(object : Callback<List<PostModel?>?> {
             @SuppressLint("NotifyDataSetChanged")

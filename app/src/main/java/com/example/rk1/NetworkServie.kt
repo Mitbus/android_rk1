@@ -1,14 +1,10 @@
-package com.example.lab3
+package com.example.rk1
 
 import retrofit2.Call
 import retrofit2.converter.gson.GsonConverterFactory
 
 import retrofit2.Retrofit
 import retrofit2.http.GET
-import retrofit2.http.Path
-import com.google.gson.JsonObject
-import com.squareup.moshi.Json
-import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.Query
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
