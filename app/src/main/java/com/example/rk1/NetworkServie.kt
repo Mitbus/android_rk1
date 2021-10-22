@@ -10,8 +10,8 @@ import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
 
-interface UmoriliApi {
-    @GET("/api/get")
+interface requestApi {
+    @GET("/data/v2/histoday?fsym=BTC&tsym=USD&limit=10")
     fun getData(
         @Query("name") resourceName: String?,
         @Query("num") count: Int
@@ -43,15 +43,15 @@ class PostModel {
 class NetworkService private constructor() {
 
     companion object {
-        private const val BASE_URL = "https://umorili.herokuapp.com"
+        private const val BASE_URL = "https://min-api.cryptocompare.com"
 
         private val mRetrofit: Retrofit = Retrofit.Builder()
-            .baseUrl("https://umorili.herokuapp.com") //Базовая часть адреса
+            .baseUrl(BASE_URL) //Базовая часть адреса
             .addConverterFactory(GsonConverterFactory.create()) //Конвертер, необходимый для преобразования JSON'а в объекты
             .build()
 
-        fun getJSONApi(): UmoriliApi? {
-            return mRetrofit.create(UmoriliApi::class.java)
+        fun getJSONApi(): requestApi? {
+            return mRetrofit.create(requestApi::class.java)
         }
     }
 }

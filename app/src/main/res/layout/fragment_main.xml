@@ -17,19 +17,40 @@
             app:layout_constraintBottom_toTopOf="@+id/link_web"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toBottomOf="@+id/currency_text">
 
         </androidx.recyclerview.widget.RecyclerView>
 
         <TextView
             android:id="@+id/link_web"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_marginBottom="16dp"
-            android:text="TextView"
+            android:text="@string/view_more_link"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
+
+        <EditText
+            android:id="@+id/currency_text"
+            android:layout_width="317dp"
+            android:layout_height="46dp"
+            android:layout_marginStart="28dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="@string/currency"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/search_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:text="@string/search"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/currency_text"
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>
