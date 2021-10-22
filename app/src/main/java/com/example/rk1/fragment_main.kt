@@ -1,11 +1,15 @@
 package com.example.rk1
 
 import android.annotation.SuppressLint
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -32,6 +37,7 @@ class fragment_main : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var viewAdapter: RecyclerView.Adapter<*>
     private lateinit var viewManager: RecyclerView.LayoutManager
+    private var currencyTag: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,9 +55,19 @@ class fragment_main : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_main, container, false)
         val linkText = view.findViewById<TextView>(R.id.link_web)
+        val currencyText = view.findViewById<EditText>(R.id.currency_text)
+        val button = view.findViewById<Button>(R.id.search_button)
+        currencyTag = currencyText.text.toString().lowercase(Locale.getDefault())
 
         linkText.setOnClickListener{
-            
+            val url = if (currencyTag != null) {
+                "https://www.cryptocompare.com/coins/$currencyTag/overview/USDT"
+            } else {
+                "https://www.cryptocompare.com"
+            }
+            val intent = Intent(Intent.ACTION_VIEW)
+            intent.data = Uri.parse(url)
+            startActivity(intent)
         }
 
         viewManager = LinearLayoutManager(view.context)
