@@ -60,6 +60,7 @@ class fragment_main : Fragment() {
         currencyTag = currencyText.text.toString().lowercase(Locale.getDefault())
 
         linkText.setOnClickListener{
+            currencyTag = currencyText.text.toString().lowercase(Locale.getDefault())
             val url = if (currencyTag != null) {
                 "https://www.cryptocompare.com/coins/$currencyTag/overview/USDT"
             } else {
