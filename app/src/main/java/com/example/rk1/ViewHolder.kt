@@ -12,7 +12,6 @@ import com.example.rk1.R
 class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private val listItemViewDescription = itemView.findViewById<TextView>(R.id.description_item)
     private val listItemViewHeader = itemView.findViewById<TextView>(R.id.tv_item)
-    private val listItemViewImage = itemView.findViewById<CardView>(R.id.image)
 
     fun setText(data: Info) {
         listItemViewDescription.text = data.description
@@ -20,17 +19,15 @@ class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     }
 
     fun isHidden(): Boolean {
-        return listItemViewImage.visibility == View.GONE
+        return listItemViewDescription.visibility == View.GONE
     }
 
     fun showMore() {
         listItemViewDescription.visibility = View.VISIBLE
-        listItemViewImage.visibility = View.VISIBLE
     }
 
     fun hideMore() {
         listItemViewDescription.visibility = View.GONE
-        listItemViewImage.visibility = View.GONE
     }
 
     companion object {

@@ -58,6 +58,11 @@ class fragment_main : Fragment() {
         val currencyText = view.findViewById<EditText>(R.id.currency_text)
         val button = view.findViewById<Button>(R.id.search_button)
         currencyTag = currencyText.text.toString().lowercase(Locale.getDefault())
+        updateListAdapter(view)
+
+        button.setOnClickListener {
+            updateListAdapter(view)
+        }
 
         linkText.setOnClickListener{
             currencyTag = currencyText.text.toString().lowercase(Locale.getDefault())
@@ -71,6 +76,10 @@ class fragment_main : Fragment() {
             startActivity(intent)
         }
 
+        return view
+    }
+
+    fun updateListAdapter(view: View) {
         viewManager = LinearLayoutManager(view.context)
         viewAdapter = ListAdapter()
         recyclerView = view.findViewById<RecyclerView>(R.id.recycler_view).apply {
@@ -78,21 +87,31 @@ class fragment_main : Fragment() {
             layoutManager = viewManager
             adapter = viewAdapter
         }
+
         NetworkService.getJSONApi()
-            ?.getData("bash", 50)
-            ?.enqueue(object : Callback<List<PostModel?>?> {
+            ?.getData()
+            ?.enqueue(object : Callback<ApiResponse?> {
                 @SuppressLint("NotifyDataSetChanged")
                 override fun onResponse(
-                    call: Call<List<PostModel?>?>,
-                    response: Response<List<PostModel?>?>
+                    call: Call<ApiResponse?>,
+                    response: Response<ApiResponse?>
                 ) {
-                    response.body()?.forEach { it ->
-                        (viewAdapter as ListAdapter).addData(it)
+                    val body = response.body()
+                    if (body?.data != null) {
+                        body.data?.rows?.forEach { it ->
+                            (viewAdapter as ListAdapter).addData(it)
+                        }
+                        recyclerView.adapter!!.notifyDataSetChanged()
+                    } else {
+                        Toast.makeText(
+                            view.context,
+                            "Error while parsing request",
+                            Toast.LENGTH_LONG
+                        ).show()
                     }
-                    recyclerView.adapter!!.notifyDataSetChanged()
                 }
 
-                override fun onFailure(call: Call<List<PostModel?>?>, t: Throwable) {
+                override fun onFailure(call: Call<ApiResponse?>, t: Throwable) {
                     Toast.makeText(
                         view.context,
                         "An error occurred during networking $t",
@@ -100,7 +119,6 @@ class fragment_main : Fragment() {
                     ).show()
                 }
             })
-        return view
     }
 
     companion object {

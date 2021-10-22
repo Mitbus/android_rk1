@@ -5,39 +5,59 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 import retrofit2.Retrofit
 import retrofit2.http.GET
-import retrofit2.http.Query
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
 
 interface requestApi {
     @GET("/data/v2/histoday?fsym=BTC&tsym=USD&limit=10")
-    fun getData(
-        @Query("name") resourceName: String?,
-        @Query("num") count: Int
-    ): Call<List<PostModel?>?>?
+    fun getData(): Call<ApiResponse?>?
 }
 
-class PostModel {
-    @SerializedName("site")
+class ApiResponse {
+    @SerializedName("Responce")
     @Expose
-    var site: String? = null
+    var responce: String? = null
 
-    @SerializedName("name")
+    @SerializedName("Data")
     @Expose
-    var name: String? = null
+    var data: Data? = null
+}
 
-    @SerializedName("desc")
+class Data {
+    @SerializedName("Data")
     @Expose
-    var desc: String? = null
+    var rows: ArrayList<DataRow?>? = null
+}
 
-    @SerializedName("link")
+class DataRow {
+    @SerializedName("time")
     @Expose
-    var link: String? = null
+    var time: String? = null
 
-    @SerializedName("elementPureHtml")
+    @SerializedName("high")
     @Expose
-    var elementPureHtml: String? = null
+    var high: String? = null
+
+    @SerializedName("low")
+    @Expose
+    var low: String? = null
+
+    @SerializedName("open")
+    @Expose
+    var open: String? = null
+
+    @SerializedName("close")
+    @Expose
+    var close: String? = null
+
+    @SerializedName("volumefrom")
+    @Expose
+    var volumeFrom: String? = null
+
+    @SerializedName("volumeto")
+    @Expose
+    var volumeTo: String? = null
 }
 
 class NetworkService private constructor() {

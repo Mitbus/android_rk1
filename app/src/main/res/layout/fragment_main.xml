@@ -41,7 +41,7 @@
             android:layout_marginEnd="16dp"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="@string/currency"
+            android:text="btc"
             app:layout_constraintEnd_toStartOf="@+id/search_button"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
