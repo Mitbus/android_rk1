@@ -2,7 +2,7 @@ package com.example.rk1
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.lab3.R
+import com.example.rk1.R
 
 class SettingsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

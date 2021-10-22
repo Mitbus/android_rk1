@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.lab3.R
+import com.example.rk1.R
 
 
 class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

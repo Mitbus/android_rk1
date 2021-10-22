@@ -11,7 +11,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.lab3.R
+import com.example.rk1.R
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
