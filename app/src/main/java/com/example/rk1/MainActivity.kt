@@ -20,46 +20,10 @@ class MainActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var viewAdapter: RecyclerView.Adapter<*>
     private lateinit var viewManager: RecyclerView.LayoutManager
-    private var logT = "DISPLAY LOG: "
-
-    override fun onPause() {
-        super.onPause()
-        logT += "onPause "
-        Log.w("events", "omPause")
-    }
-
-    override fun onStop() {
-        super.onStop()
-        logT += "onStop "
-        Log.w("events", "onStop")
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        logT += "onDestroy "
-        Log.w("events", "onDestroy")
-    }
-
-    override fun onStart() {
-        super.onStart()
-        logT += "onStart "
-        Log.w("events", "onStart")
-    }
-
-    override fun onResume() {
-        super.onResume()
-        logT += "onResume "
-        Log.w("events", "onResume")
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        logT += "onCreate "
-        Log.w("events", "onCreate")
         setContentView(R.layout.activity_main)
-
-        val textLog = findViewById<TextView>(R.id.textLog)
-        textLog.text = logT
 
         viewManager = LinearLayoutManager(this)
         viewAdapter = ListAdapter()
