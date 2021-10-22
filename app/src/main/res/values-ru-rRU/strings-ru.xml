@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">rk1</string>
+    <string name="hello_blank_fragment">Пустой фрагмент</string>
+    <string name="days_range_error">Значение должно быть целым числом в диапазоне от 1 до 3650</string>
+    <string name="daysCount">Количество дней</string>
+    <string name="settings">Настройки</string>
+    <string name="currency">Валюта</string>
+    <string name="language">Язык</string>
+    <string name="usd">USD</string>
+    <string name="ru">RU</string>
+    <string name="pref_currency" translatable="false">currency</string>
+    <string name="pref_days_count" translatable="false">daysCount</string>
+    <string name="pref_language" translatable="false">language</string>
+</resources>

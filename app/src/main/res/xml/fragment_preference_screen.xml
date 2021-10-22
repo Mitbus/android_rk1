@@ -4,6 +4,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <EditTextPreference
+        android:defaultValue="1"
         app:key="daysCount"
         app:title="@string/daysCount"/>
 
