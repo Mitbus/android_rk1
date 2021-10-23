@@ -18,8 +18,8 @@
     <string name="runtime_api_error">Ошибка во время обработки запроса</string>
     <string name="date">Дата</string>
     <string name="avg">Среднее значение</string>
-    <string name="min_val">Максимальное значение</string>
-    <string name="max_val">Минимальное значение</string>
+    <string name="min_val">Минимальное значение</string>
+    <string name="max_val">Максимальное значение</string>
     <string name="open">Цена открытия</string>
     <string name="close">Цена закрытия</string>
     <string name="volume_from">Минимальный объем</string>

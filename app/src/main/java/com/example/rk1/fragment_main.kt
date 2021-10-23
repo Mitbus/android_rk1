@@ -70,10 +70,6 @@ class fragment_main : Fragment() {
             prefs.getString(resources.getString(R.string.pref_currency), "USD") ?: "USD"
         updateListAdapter(view, currencyTag, getCurrency(), getDaysCount())
 
-        recycler.setOnClickListener {
-            Navigation.createNavigateOnClickListener(R.id.action_fragment_main_to_fragment_more_info)
-        }
-
         button.setOnClickListener {
             currencyTag = currencyText.text.toString().uppercase(Locale.getDefault())
             updateListAdapter(view, currencyTag, getCurrency(), getDaysCount())
@@ -86,13 +82,12 @@ class fragment_main : Fragment() {
             intent.data = Uri.parse(url)
             startActivity(intent)
         }
-
         return view
     }
 
     fun updateListAdapter(view: View, currencyFrom: String, currenctTo: String, limit: Int) {
         viewManager = LinearLayoutManager(view.context)
-        viewAdapter = ListAdapter()
+        viewAdapter = ListAdapter(currenctTo)
         recyclerView = view.findViewById<RecyclerView>(R.id.recycler_view).apply {
             setHasFixedSize(true)
             layoutManager = viewManager
@@ -100,7 +95,7 @@ class fragment_main : Fragment() {
         }
 
         NetworkService.getJSONApi()
-            ?.getData(currencyFrom, currenctTo, limit)
+            ?.getData(currencyFrom, currenctTo, limit - 1)
             ?.enqueue(object : Callback<ApiResponse?> {
                 @SuppressLint("NotifyDataSetChanged")
                 override fun onResponse(
@@ -126,7 +121,7 @@ class fragment_main : Fragment() {
                 override fun onFailure(call: Call<ApiResponse?>, t: Throwable) {
                     Toast.makeText(
                         view.context,
-                        "$t",
+                        "Error: $t",
                         Toast.LENGTH_LONG
                     ).show()
                 }

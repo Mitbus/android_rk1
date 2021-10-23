@@ -8,7 +8,7 @@ import java.text.SimpleDateFormat
 import java.time.Instant
 import java.time.format.DateTimeFormatter
 
-class ListAdapter : RecyclerView.Adapter<ViewHolder>() {
+class ListAdapter(val currency: String) : RecyclerView.Adapter<ViewHolder>() {
     var data = mutableListOf<Info>()
     set(value) {
         field = value
@@ -26,13 +26,13 @@ class ListAdapter : RecyclerView.Adapter<ViewHolder>() {
         val avg = (dataRow?.low?.let {
             dataRow.high?.toDouble()?.plus(it.toDouble())?.div(2)
         })?.let {
-            "${view.resources.getString(R.string.avg)}: %.3f\n".format(it)
+            "${view.resources.getString(R.string.avg)}: %.3f $currency\n".format(it)
         }
 
-        val low = dataRow?.low?.let {"${view.resources.getString(R.string.min_val)}: $it\n"}
-        val high = dataRow?.high?.let {"${view.resources.getString(R.string.max_val)}: $it\n"}
-        val open = dataRow?.open?.let {"${view.resources.getString(R.string.open)}: $it\n"}
-        val close = dataRow?.close?.let {"${view.resources.getString(R.string.close)}: $it\n"}
+        val low = dataRow?.low?.let {"${view.resources.getString(R.string.min_val)}: $it $currency\n"}
+        val high = dataRow?.high?.let {"${view.resources.getString(R.string.max_val)}: $it $currency\n"}
+        val open = dataRow?.open?.let {"${view.resources.getString(R.string.open)}: $it $currency\n"}
+        val close = dataRow?.close?.let {"${view.resources.getString(R.string.close)}: $it $currency\n"}
         val from = dataRow?.volumeFrom?.let {"${view.resources.getString(R.string.volume_from)}: $it\n"}
         val to = dataRow?.volumeTo?.let {"${view.resources.getString(R.string.volume_to)}: $it\n"}
 

@@ -21,6 +21,10 @@ class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         listItemViewHeader.text = data.header
     }
 
+    fun getDescriptionText(): String {
+        return listItemViewDescription.text.toString()
+    }
+
     fun isHidden(): Boolean {
         return listItemViewDescription.visibility == View.GONE
     }
@@ -40,6 +44,8 @@ class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
                 .inflate(R.layout.list_item, parent, false)
             val viewHolder = ViewHolder(view)
             view.setOnClickListener {
+                fragment_settings.bodyText = viewHolder.getDescriptionText()
+                view.findNavController().navigate(R.id.action_fragment_main_to_fragment_more_info)
                 if (viewHolder.isHidden())
                     viewHolder.showMore()
                 else
