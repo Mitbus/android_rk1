@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import androidx.preference.PreferenceManager
@@ -15,6 +16,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
 
         instance = this
         val fragmentMain = supportFragmentManager.findFragmentById(R.id.fragment_main) as NavHostFragment
@@ -27,6 +29,12 @@ class MainActivity : AppCompatActivity() {
             resources.updateConfiguration(resources.configuration, null)
             recreate()
         }
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        val fragmentMain = supportFragmentManager.findFragmentById(R.id.fragment_main) as NavHostFragment
+        val navController = fragmentMain.navController
+        return navController.navigateUp()
     }
 
 

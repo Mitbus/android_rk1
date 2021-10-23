@@ -12,6 +12,8 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import retrofit2.Call
@@ -37,7 +39,7 @@ class fragment_main : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var viewAdapter: RecyclerView.Adapter<*>
     private lateinit var viewManager: RecyclerView.LayoutManager
-    private var currencyTag: String? = null
+    private lateinit var currencyTag: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,20 +59,22 @@ class fragment_main : Fragment() {
         val linkText = view.findViewById<TextView>(R.id.link_web)
         val currencyText = view.findViewById<EditText>(R.id.currency_text)
         val button = view.findViewById<Button>(R.id.search_button)
-        currencyTag = currencyText.text.toString().lowercase(Locale.getDefault())
-        updateListAdapter(view)
+        val recycler = view.findViewById<RecyclerView>(R.id.recycler_view)
+        currencyTag = currencyText.text.toString().uppercase(Locale.getDefault())
+        updateListAdapter(view, currencyTag, "USD", 100)
+
+        recycler.setOnClickListener {
+            Navigation.createNavigateOnClickListener(R.id.action_fragment_main_to_fragment_more_info)
+        }
 
         button.setOnClickListener {
-            updateListAdapter(view)
+            currencyTag = currencyText.text.toString().uppercase(Locale.getDefault())
+            updateListAdapter(view, currencyTag, "USD", 100)
         }
 
         linkText.setOnClickListener{
-            currencyTag = currencyText.text.toString().lowercase(Locale.getDefault())
-            val url = if (currencyTag != null) {
-                "https://www.cryptocompare.com/coins/$currencyTag/overview/USDT"
-            } else {
-                "https://www.cryptocompare.com"
-            }
+            currencyTag = currencyText.text.toString().uppercase(Locale.getDefault())
+            val url = "https://www.cryptocompare.com/coins/${currencyTag.lowercase(Locale.getDefault())}/overview/USDT"
             val intent = Intent(Intent.ACTION_VIEW)
             intent.data = Uri.parse(url)
             startActivity(intent)
@@ -79,7 +83,7 @@ class fragment_main : Fragment() {
         return view
     }
 
-    fun updateListAdapter(view: View) {
+    fun updateListAdapter(view: View, currencyFrom: String, currenctTo: String, limit: Int) {
         viewManager = LinearLayoutManager(view.context)
         viewAdapter = ListAdapter()
         recyclerView = view.findViewById<RecyclerView>(R.id.recycler_view).apply {
@@ -89,7 +93,7 @@ class fragment_main : Fragment() {
         }
 
         NetworkService.getJSONApi()
-            ?.getData()
+            ?.getData(currencyFrom, currenctTo, limit)
             ?.enqueue(object : Callback<ApiResponse?> {
                 @SuppressLint("NotifyDataSetChanged")
                 override fun onResponse(
@@ -98,23 +102,24 @@ class fragment_main : Fragment() {
                 ) {
                     val body = response.body()
                     if (body?.data != null) {
+                        if (body.data?.rows == null) {
+                            Toast.makeText(view.context, R.string.invalid_code_error,
+                                Toast.LENGTH_LONG).show()
+                        }
                         body.data?.rows?.forEach { it ->
-                            (viewAdapter as ListAdapter).addData(it)
+                            (viewAdapter as ListAdapter).addData(it, view)
                         }
                         recyclerView.adapter!!.notifyDataSetChanged()
                     } else {
-                        Toast.makeText(
-                            view.context,
-                            "Error while parsing request",
-                            Toast.LENGTH_LONG
-                        ).show()
+                        Toast.makeText(view.context, R.string.runtime_api_error,
+                            Toast.LENGTH_LONG).show()
                     }
                 }
 
                 override fun onFailure(call: Call<ApiResponse?>, t: Throwable) {
                     Toast.makeText(
                         view.context,
-                        "An error occurred during networking $t",
+                        "$t",
                         Toast.LENGTH_LONG
                     ).show()
                 }

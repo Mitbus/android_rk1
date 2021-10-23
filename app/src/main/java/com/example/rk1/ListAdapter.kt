@@ -1,6 +1,7 @@
 package com.example.rk1
 
 import android.annotation.SuppressLint
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import java.text.SimpleDateFormat
@@ -16,24 +17,24 @@ class ListAdapter : RecyclerView.Adapter<ViewHolder>() {
 
     val datePart = 10
 
-    fun addData(dataRow: DataRow?) {
+    fun addData(dataRow: DataRow?, view: View) {
         val date = dataRow?.time?.let {
-            "date: ${DateTimeFormatter.ISO_INSTANT.format(
+            "${view.resources.getString(R.string.date)}: ${DateTimeFormatter.ISO_INSTANT.format(
                 Instant.ofEpochSecond(it.toLong())
             ).substring(0, datePart)}\n"
         }
         val avg = (dataRow?.low?.let {
             dataRow.high?.toDouble()?.plus(it.toDouble())?.div(2)
         })?.let {
-            "average value: %.3f\n".format(it)
+            "${view.resources.getString(R.string.avg)}: %.3f\n".format(it)
         }
 
-        val low = dataRow?.low?.let {"min value: $it\n"}
-        val high = dataRow?.high?.let {"max value: $it\n"}
-        val open = dataRow?.open?.let {"opened value: $it\n"}
-        val close = dataRow?.close?.let {"closed value: $it\n"}
-        val from = dataRow?.volumeFrom?.let {"volume from: $it\n"}
-        val to = dataRow?.volumeTo?.let {"volume to: $it\n"}
+        val low = dataRow?.low?.let {"${view.resources.getString(R.string.min_val)}: $it\n"}
+        val high = dataRow?.high?.let {"${view.resources.getString(R.string.max_val)}: $it\n"}
+        val open = dataRow?.open?.let {"${view.resources.getString(R.string.open)}: $it\n"}
+        val close = dataRow?.close?.let {"${view.resources.getString(R.string.close)}: $it\n"}
+        val from = dataRow?.volumeFrom?.let {"${view.resources.getString(R.string.volume_from)}: $it\n"}
+        val to = dataRow?.volumeTo?.let {"${view.resources.getString(R.string.volume_to)}: $it\n"}
 
         val head = "$date$avg"
         val tail = "$date$avg$low$high$open$close$from$to"

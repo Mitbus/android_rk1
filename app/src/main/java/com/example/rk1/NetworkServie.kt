@@ -7,11 +7,14 @@ import retrofit2.Retrofit
 import retrofit2.http.GET
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import retrofit2.http.Query
 
 
 interface requestApi {
-    @GET("/data/v2/histoday?fsym=BTC&tsym=USD&limit=10")
-    fun getData(): Call<ApiResponse?>?
+    @GET("/data/v2/histoday?")
+    fun getData(@Query("fsym") fsym: String,
+                @Query("tsym") tsym: String,
+                @Query("limit") limit: Int): Call<ApiResponse?>?
 }
 
 class ApiResponse {

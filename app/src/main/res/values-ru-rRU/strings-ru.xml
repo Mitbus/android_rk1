@@ -12,4 +12,16 @@
     <string name="pref_currency" translatable="false">currency</string>
     <string name="pref_days_count" translatable="false">daysCount</string>
     <string name="pref_language" translatable="false">language</string>
+    <string name="view_more_link">Смотреть подробнее на cryptocompare.com</string>
+    <string name="search">Поиск</string>
+    <string name="invalid_code_error">Неверный код криптовалюты</string>
+    <string name="runtime_api_error">Ошибка во время обработки запроса</string>
+    <string name="date">Дата</string>
+    <string name="avg">Среднее значение</string>
+    <string name="min_val">Максимальное значение</string>
+    <string name="max_val">Минимальное значение</string>
+    <string name="open">Цена открытия</string>
+    <string name="close">Цена закрытия</string>
+    <string name="volume_from">Минимальный объем</string>
+    <string name="volume_to">Максимальный объем</string>
 </resources>
