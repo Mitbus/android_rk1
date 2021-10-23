@@ -63,9 +63,12 @@ class fragment_main : Fragment() {
         val button = view.findViewById<Button>(R.id.search_button)
         val recycler = view.findViewById<RecyclerView>(R.id.recycler_view)
         currencyTag = currencyText.text.toString().uppercase(Locale.getDefault())
-        var currency = PreferenceManager.getDefaultSharedPreferences(context)
-            .getString(resources.getString(R.string.pref_currency), "USD") ?: "USD"
-        updateListAdapter(view, currencyTag, currency, 100)
+        val prefs = PreferenceManager.getDefaultSharedPreferences(context)
+        fun getDaysCount(): Int =
+            (prefs.getString(resources.getString(R.string.pref_days_count), "1") ?: "1").toInt()
+        fun getCurrency(): String =
+            prefs.getString(resources.getString(R.string.pref_currency), "USD") ?: "USD"
+        updateListAdapter(view, currencyTag, getCurrency(), getDaysCount())
 
         recycler.setOnClickListener {
             Navigation.createNavigateOnClickListener(R.id.action_fragment_main_to_fragment_more_info)
@@ -73,16 +76,12 @@ class fragment_main : Fragment() {
 
         button.setOnClickListener {
             currencyTag = currencyText.text.toString().uppercase(Locale.getDefault())
-            currency = PreferenceManager.getDefaultSharedPreferences(context)
-                .getString(resources.getString(R.string.pref_currency), "USD") ?: "USD"
-            updateListAdapter(view, currencyTag, currency, 100)
+            updateListAdapter(view, currencyTag, getCurrency(), getDaysCount())
         }
 
         linkText.setOnClickListener{
             currencyTag = currencyText.text.toString().uppercase(Locale.getDefault())
-            currency = PreferenceManager.getDefaultSharedPreferences(context)
-                .getString(resources.getString(R.string.pref_currency), "USD") ?: "USD"
-            val url = "https://www.cryptocompare.com/coins/${currencyTag.lowercase(Locale.getDefault())}/overview/$currency"
+            val url = "https://www.cryptocompare.com/coins/${currencyTag.lowercase(Locale.getDefault())}/overview/${getCurrency()}"
             val intent = Intent(Intent.ACTION_VIEW)
             intent.data = Uri.parse(url)
             startActivity(intent)
